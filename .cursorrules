@@ -1,0 +1,17 @@
+# Project: Automated_Attendance
+# Ecosystem: Typescript
+
+You are working on a TypeScript project.
+Runtime: node
+Package manager: npm
+Frontend: react-vite
+Backend: express
+Database: mongodb with mongoose
+API: trpc
+Auth: better-auth
+Testing: vitest
+Validation: zod
+
+Follow existing code patterns and conventions.
+Use the established project structure.
+Keep this file updated when the project structure changes.

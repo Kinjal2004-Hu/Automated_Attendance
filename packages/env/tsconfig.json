@@ -1,0 +1,3 @@
+{
+  "extends": "@Automated_Attendance/config/tsconfig.base.json"
+}

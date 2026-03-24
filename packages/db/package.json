@@ -1,0 +1,23 @@
+{
+  "name": "@Automated_Attendance/db",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@Automated_Attendance/env": "*",
+    "dotenv": "^17.2.2",
+    "mongoose": "^8.14.0",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@Automated_Attendance/config": "*",
+    "typescript": "^5"
+  }
+}
