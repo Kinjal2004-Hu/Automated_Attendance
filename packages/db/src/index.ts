@@ -8,3 +8,5 @@ await mongoose.connect(env.DATABASE_URL).catch((error) => {
 const client = mongoose.connection.getClient().db("myDB");
 
 export { client };
+export { User, Session, Account, Verification } from "./models/auth.model";
+export { Student, FaceEmbedding, Class, AttendanceRecord, ProcessingJob } from "./models/attendance.model";

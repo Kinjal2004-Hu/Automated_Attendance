@@ -9,6 +9,7 @@ import Loader from "./loader";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 
 export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () => void }) {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
       email: "",
       password: "",
       name: "",
+      role: "student" as "student" | "faculty",
     },
     onSubmit: async ({ value }) => {
       await authClient.signUp.email(
@@ -26,6 +28,9 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
           email: value.email,
           password: value.password,
           name: value.name,
+          data: {
+            role: value.role,
+          },
         },
         {
           onSuccess: () => {
@@ -43,6 +48,7 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
         name: z.string().min(2, "Name must be at least 2 characters"),
         email: z.email("Invalid email address"),
         password: z.string().min(8, "Password must be at least 8 characters"),
+        role: z.enum(["student", "faculty"]),
       }),
     },
   });
@@ -121,6 +127,31 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
                 />
+                {field.state.meta.errors.map((error) => (
+                  <p key={error?.message} className="text-red-500">
+                    {error?.message}
+                  </p>
+                ))}
+              </div>
+            )}
+          </form.Field>
+        </div>
+
+        <div>
+          <form.Field name="role">
+            {(field) => (
+              <div className="space-y-2">
+                <Label>Role</Label>
+                <RadioGroup value={field.state.value} onValueChange={field.handleChange}>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="student" id="student" />
+                    <Label htmlFor="student" className="cursor-pointer">Student</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="faculty" id="faculty" />
+                    <Label htmlFor="faculty" className="cursor-pointer">Faculty</Label>
+                  </div>
+                </RadioGroup>
                 {field.state.meta.errors.map((error) => (
                   <p key={error?.message} className="text-red-500">
                     {error?.message}

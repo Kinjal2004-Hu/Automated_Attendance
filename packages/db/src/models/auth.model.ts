@@ -9,6 +9,7 @@ const userSchema = new Schema(
     email: { type: String, required: true, unique: true },
     emailVerified: { type: Boolean, required: true },
     image: { type: String },
+    role: { type: String, enum: ["student", "faculty", "admin"], default: "student" },
     createdAt: { type: Date, required: true },
     updatedAt: { type: Date, required: true },
   },

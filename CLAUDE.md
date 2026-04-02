@@ -33,10 +33,16 @@ This file provides context about the project for AI assistants.
 
 - Provider: better-auth
 
+### AI & ML
+
+- AI Service: Bytez.js (GPT-4o via Bytez API)
+- ML Service: Python-based face detection and recognition
+- Realtime: socket-io
+
 ### Additional Features
 
 - Testing: vitest
-- Realtime: socket-io
+- Charts: recharts
 
 ## Project Structure
 

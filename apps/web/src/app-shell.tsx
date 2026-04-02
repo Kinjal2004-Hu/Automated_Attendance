@@ -1,34 +1,26 @@
-import { QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Outlet } from "react-router";
-
-import Header from "@/components/header";
-import { ThemeProvider } from "@/components/theme-provider";
-import { Toaster } from "@/components/ui/sonner";
-import { queryClient } from "@/utils/trpc";
-
-function RoutedLayout() {
-  return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="dark"
-      disableTransitionOnChange
-      storageKey="vite-ui-theme"
-    >
-      <div className="grid h-svh grid-rows-[auto_1fr]">
-        <Header />
-        <Outlet />
-      </div>
-      <Toaster richColors />
-    </ThemeProvider>
-  );
-}
+import { Link } from "react-router";
 
 export default function AppShell() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RoutedLayout />
-      <ReactQueryDevtools position="bottom" buttonPosition="bottom-right" />
-    </QueryClientProvider>
+    <div className="mx-auto max-w-3xl px-4 py-6">
+      <header className="mb-6 border-b pb-4">
+        <h1 className="text-xl font-semibold">Automated Attendance</h1>
+        <nav className="mt-3 flex gap-4 text-sm">
+          <Link className="underline" to="/">
+            Home
+          </Link>
+          <Link className="underline" to="/enroll">
+            Enroll Student
+          </Link>
+          <Link className="underline" to="/faculty-dashboard">
+            Mark Attendance
+          </Link>
+        </nav>
+      </header>
+      <main>
+        <Outlet />
+      </main>
+    </div>
   );
 }

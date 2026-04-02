@@ -9,6 +9,16 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+  user: {
+    additionalFields: {
+      role: {
+        type: ["student", "faculty", "admin"],
+        required: false,
+        defaultValue: "student",
+        input: false, // don't allow user to set role during signup (handled separately)
+      },
+    },
+  },
   advanced: {
     defaultCookieAttributes: {
       sameSite: "none",

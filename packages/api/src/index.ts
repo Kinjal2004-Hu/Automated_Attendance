@@ -23,3 +23,49 @@ export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
     },
   });
 });
+
+export const facultyProcedure = t.procedure.use(({ ctx, next }) => {
+  if (!ctx.session) {
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: "Authentication required",
+      cause: "No session",
+    });
+  }
+  if (ctx.session.user.role !== "faculty" && ctx.session.user.role !== "admin") {
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "Faculty access required",
+      cause: "Insufficient permissions",
+    });
+  }
+  return next({
+    ctx: {
+      ...ctx,
+      session: ctx.session,
+    },
+  });
+});
+
+export const adminProcedure = t.procedure.use(({ ctx, next }) => {
+  if (!ctx.session) {
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: "Authentication required",
+      cause: "No session",
+    });
+  }
+  if (ctx.session.user.role !== "admin") {
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "Admin access required",
+      cause: "Insufficient permissions",
+    });
+  }
+  return next({
+    ctx: {
+      ...ctx,
+      session: ctx.session,
+    },
+  });
+});
