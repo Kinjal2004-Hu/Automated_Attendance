@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
-import { Card } from "./ui/card";
+import { Button } from "../ui/button";
+import { Label } from "../ui/label";
+import { Card } from "../ui/card";
 import { X } from "lucide-react";
 import z from "zod";
 import { useForm } from "@tanstack/react-form";
@@ -49,7 +48,7 @@ export function EditAttendanceModal({
       onSubmit: z.object({
         flagged: z.boolean(),
         flagReason: z.enum(["not_recognized", "low_confidence", "manual_review"]),
-        notes: z.string().optional(),
+        notes: z.string(),
       }),
     },
   });
@@ -64,6 +63,9 @@ export function EditAttendanceModal({
           </h2>
           <button
             onClick={onClose}
+            type="button"
+            aria-label="Close edit attendance modal"
+            title="Close"
             className="text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
           >
             <X size={20} />
@@ -119,6 +121,8 @@ export function EditAttendanceModal({
                     type="checkbox"
                     checked={field.state.value}
                     onChange={(e) => field.handleChange(e.target.checked)}
+                    aria-label="Flag this record for review"
+                    title="Flag this record for review"
                     className="w-4 h-4 rounded border-slate-300 dark:border-slate-600"
                   />
                   <span>Flag this record for review</span>
@@ -137,6 +141,8 @@ export function EditAttendanceModal({
                     id="flagReason"
                     value={field.state.value}
                     onChange={(e) => field.handleChange(e.target.value as any)}
+                    aria-label="Reason for flag"
+                    title="Reason for flag"
                     className="w-full border border-slate-300 dark:border-slate-600 rounded px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                   >
                     <option value="not_recognized">Not Recognized</option>

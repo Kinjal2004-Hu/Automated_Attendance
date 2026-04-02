@@ -1,6 +1,4 @@
 import * as React from "react"
-import { Primitive } from "@base-ui/react/Primitive"
-import { useControlled } from "@base-ui/react/useControlled"
 import { cn } from "@/lib/utils"
 
 const RadioGroup = React.forwardRef<
@@ -10,23 +8,24 @@ const RadioGroup = React.forwardRef<
     onValueChange?: (value: string) => void
   }
 >(({ className, value: valueProp, onValueChange, ...props }, ref) => {
-  const [value, setValue] = useControlled({
-    controlled: valueProp,
-    default: "",
-  })
+  const [value, setValue] = React.useState(valueProp || "")
+
+  const handleChange = (newValue: string) => {
+    setValue(newValue)
+    onValueChange?.(newValue)
+  }
 
   return (
-    <Primitive.div
+    <div
       ref={ref}
       role="radiogroup"
       className={cn("flex flex-col space-y-2", className)}
       {...props}
-      onClick={(e: React.MouseEvent) => {
+      onClick={(e: React.MouseEvent<HTMLDivElement>) => {
         props.onClick?.(e)
         const target = e.target as HTMLInputElement
         if (target.type === "radio") {
-          setValue(target.value)
-          onValueChange?.(target.value)
+          handleChange(target.value)
         }
       }}
     />

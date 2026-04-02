@@ -191,6 +191,8 @@ export function AdminUsersPage() {
                                   e.target.value as "student" | "faculty" | "admin"
                                 )
                               }
+                              aria-label="Select user role"
+                              title="Select user role"
                               className="text-sm px-2 py-1 rounded border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white"
                             >
                               <option value="student">Student</option>
